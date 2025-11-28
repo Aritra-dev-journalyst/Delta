@@ -1,0 +1,33 @@
+{
+  "name": "delta-backend",
+  "version": "1.0.0",
+  "description": "Delta Exchange Demo API Backend (India + Global)",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "nodemon --exec npx ts-node src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "delta",
+    "trading",
+    "api",
+    "typescript",
+    "express"
+  ],
+  "author": "Aritra",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.1.7",
+    "@types/node": "^20.11.30",
+    "@types/express": "^5.0.5"
+  }
+}
