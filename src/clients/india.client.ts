@@ -3,32 +3,36 @@ import { INDIA_CONFIG } from "../config/india.config";
 import { signRequest } from "../utils/signer";
 
 export async function indiaCall(
-    method: "GET" | "POST",
-    path: string,
-    body?: unknown
+  method: "GET" | "POST",
+  path: string,
+  body?: unknown
 ) {
-    const { timestamp, signature } = signRequest(
-        method,
-        path,
-        INDIA_CONFIG.API_SECRET,
-        body
-    );
+  const { timestamp, signature } = signRequest(
+    method,
+    path,
+    INDIA_CONFIG.API_SECRET,
+    body
+  );
 
-    const headers: any = {
-        "api-key": INDIA_CONFIG.API_KEY,
-        timestamp,
-        signature,
-        "Content-Type": "application/json",
-    };
+  const headers: any = {
+    "api-key": INDIA_CONFIG.API_KEY,
+    timestamp,
+    signature,
+    "Content-Type": "application/json",
+    "User-Agent": "node-typescript-client",
+  };
 
-    if (INDIA_CONFIG.PASSPHRASE) {
-        headers.passphrase = INDIA_CONFIG.PASSPHRASE;
-    }
+  if (INDIA_CONFIG.PASSPHRASE) {
+    headers.passphrase = INDIA_CONFIG.PASSPHRASE;
+  }
 
-    return axios({
-        method,
-        url: `${INDIA_CONFIG.BASE_URL}${path}`,
-        headers,
-        data: body,
-    });
+  const res = await axios({
+    method,
+    url: `${INDIA_CONFIG.BASE_URL}${path}`,
+    headers,
+    data: body,
+  });
+
+  return res.data; // Return the response data directly
 }
+

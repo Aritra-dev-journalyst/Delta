@@ -6,7 +6,9 @@ export function signRequest(
   apiSecret: string,
   body?: unknown
 ) {
-  const timestamp = Math.floor(Date.now() / 1000).toString();
+  // CRITICAL FIX: Delta Exchange uses SECONDS, not microseconds!
+  const timestamp = Math.floor(Date.now() / 1000).toString(); // Seconds
+
   const payload = body ? JSON.stringify(body) : "";
   const message = method + timestamp + path + payload;
 
