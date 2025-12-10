@@ -15,7 +15,7 @@ app.use("/api/global", globalRoutes);
 app.use("/api/india", indiaRoutes);
 
 // IMPORTANT: real listening port
-const PORT = 3000;
+const PORT = 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running → http://localhost:${PORT}`);

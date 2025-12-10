@@ -18,17 +18,20 @@ export async function globalCall(
         "api-key": GLOBAL_CONFIG.API_KEY,
         timestamp,
         signature,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "node-typescript-client"
     };
 
     if (GLOBAL_CONFIG.PASSPHRASE) {
         headers.passphrase = GLOBAL_CONFIG.PASSPHRASE;
     }
 
-    return axios({
+    const res = await axios({
         method,
-        url: GLOBAL_CONFIG.BASE_URL + path,
+        url: `${GLOBAL_CONFIG.BASE_URL}${path}`,
         headers,
-        data: body
+        data: body,
     });
+
+    return res.data; // Return the response data directly
 }
